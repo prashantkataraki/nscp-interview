@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <title>Assignment - Shuffle and Sort</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+	  <!-- Page Content -->
+	  <div class="container">
+			<div class="first-row">
+				<h1>Shuffle and Sort</h1>
+			</div>
+			<div class="second-row">
+				<div class="main">
+					<div id="grid-box" class="grid-box"></div>
+				</div>
+				<div class="sidebar">
+					<button class="btn" id="shuffle">SHUFFLE</button>
+					<button class="btn" id="sort">SORT</button>
+				</div>
+			</div>
+			<div class="third-row">
+				<div class="copyright">
+						<h2><i>Shuffle and sort by Mallinath Shedishal</i></h2>
+				</div>
+			</div>
+	  </div>
+
+
+		<script src="js/jquery-3.5.1.min.js"></script>		
+		<script>
+			/* Take User Inputs */
+			var elements = $();
+			var userinputs = [1,2,3,4,5,6,7,8,9];
+			for(x = 0; x < userinputs.length; x++) {
+					elements = elements.add('<div class="box-single clr-'+x+'">'+userinputs[x]+'</div>');
+			}
+			$('#grid-box').append(elements);
+			
+			/* Shuffle Code */
+			$.fn.shuffleChildren = function() {
+				$.each(this.get(), function(index, el) {
+					var $el = $(el);
+					var $find = $el.children();
+
+					$find.sort(function() {
+						return 0.5 - Math.random();
+					});
+
+					$el.empty();
+					$find.appendTo($el);
+				});
+			};
+			
+			/* Sort Code */
+			$.fn.sortChildren = function() {
+				$.each(this.get(), function(index, el) {
+					var $el = $(el);
+					var $find = $el.children();
+
+					$find.sort(function(a, b) {
+						return $(a).text() - $(b).text();
+					});
+
+					$el.empty();
+					$find.appendTo($el);
+				});
+			};
+			
+			
+			/* Event Triggering */
+			$("#shuffle").click(function() {
+				$(".grid-box").shuffleChildren();
+			});
+			
+			$("#sort").click(function() {
+				$(".grid-box").sortChildren();
+			});
+		</script>
+	</body>
+</html>
